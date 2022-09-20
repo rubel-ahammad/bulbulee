@@ -1,0 +1,16 @@
+plugins {
+    id 'java-library'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    api project(":core:common")
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    api "javax.persistence:javax.persistence-api"
+    annotationProcessor "javax.persistence:javax.persistence-api"
+    implementation 'com.querydsl:querydsl-jpa'
+    annotationProcessor  group: 'com.querydsl', name: 'querydsl-apt', classifier: 'jpa'
+}
