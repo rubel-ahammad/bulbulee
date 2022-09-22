@@ -1,8 +1,8 @@
 package com.bulbulee.app.controllers;
 
-import com.bulbulee.core.facade.api.MemberFacade;
-import com.bulbulee.core.facade.dto.MemberDto;
-import com.ideascale.core.common.enums.MemberType;
+import com.bulbulee.facade.api.MemberFacade;
+import com.bulbulee.facade.dto.MemberDto;
+import com.bulbulee.app.common.enums.MemberType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
