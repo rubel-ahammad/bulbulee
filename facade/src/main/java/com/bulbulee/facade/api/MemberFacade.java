@@ -1,12 +1,15 @@
 package com.bulbulee.facade.api;
 
-import com.bulbulee.facade.dto.MemberDto;
+import com.bulbulee.facade.dto.MemberCreateDto;
 import com.bulbulee.app.common.enums.MemberType;
+import com.bulbulee.facade.dto.MemberDto;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface MemberFacade {
-    MemberDto save(MemberDto memberDto);
+    MemberDto create(MemberCreateDto memberCreateDto);
+    Optional<MemberDto> findMember(Long id);
     List<MemberDto> findMembers(MemberType type);
 }

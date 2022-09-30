@@ -8,7 +8,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @Builder
-public class MemberDto {
-    private final Long id;
+public class MemberCreateDto {
     private final String name;
 }

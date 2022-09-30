@@ -1,5 +1,7 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
+import java.time.Instant
+
 plugins {
     id 'base'
     id 'org.springframework.boot' version '2.7.3' apply false
@@ -24,6 +26,11 @@ subprojects {
         lombokVersion = '1.18.24'
     }
 
+    configurations {
+        ajc
+        aspects
+    }
+
     dependencies {
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -31,8 +38,37 @@ subprojects {
         annotationProcessor "javax.annotation:javax.annotation-api"
         implementation 'org.springframework:spring-context'
         implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+        implementation 'org.aspectj:aspectjrt'
+        ajc "org.aspectj:aspectjtools"
+    }
+
+    compileJava {
+        options.encoding = 'UTF-8'
+        sourceCompatibility = '11'
+        targetCompatibility = '11'
+
+        doLast {
+            if (configurations.aspects.asPath) {
+                logger.lifecycle 'Weave: Static weaving using AspectJ...'
+                javaexec { spec ->
+                    spec.mainClass = 'org.aspectj.tools.ajc.Main'
+                    spec.classpath configurations.ajc.asPath
+                    spec.args '-source', sourceCompatibility
+                    spec.args '-target', targetCompatibility
+                    spec.args '-encoding', options.encoding
+                    spec.args '-classpath', configurations.compileClasspath.asPath
+                    spec.args '-inpath', destinationDirectory.getAsFile().getOrNull()
+                    spec.args '-d', destinationDirectory.getAsFile().getOrNull()
+                    spec.args '-aspectpath', configurations.aspects.asPath
+                    //spec.args '-xmlConfigured', "${rootProject.projectDir}/aspectj-weave.xml"
+                    spec.args '-showWeaveInfo'
+                }
+            }
+        }
     }
 
     test {

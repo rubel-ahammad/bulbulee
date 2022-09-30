@@ -6,8 +6,10 @@ import com.bulbulee.service.params.MemberCreateParams;
 import com.bulbulee.service.params.MemberSearchParams;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberService {
     Member create(MemberCreateParams params);
+    Optional<Member> findMember(Long id);
     List<MemberProjection> findMembers(MemberSearchParams memberSearchParams);
 }

@@ -8,4 +8,7 @@ version '1.0-SNAPSHOT'
 dependencies {
     api project(":service")
     implementation project(":repository")
+    implementation('org.springframework.boot:spring-boot-starter-cache')
+
+    aspects "org.springframework:spring-aspects"
 }
