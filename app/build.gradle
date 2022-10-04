@@ -4,7 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation project(":facade-impl")
+    implementation(project(":facade"))
+    runtimeOnly project(":facade-impl")
     runtimeOnly project(":service-impl")
     runtimeOnly project(":repository-impl")
     implementation 'org.springframework.boot:spring-boot-devtools'

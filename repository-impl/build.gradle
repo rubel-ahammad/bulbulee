@@ -12,7 +12,7 @@ version '1.0-SNAPSHOT'
 
 
 dependencies {
-    api project(":repository")
+    implementation(project(":repository"))
     runtimeOnly('com.h2database:h2')
     implementation 'com.querydsl:querydsl-jpa'
 }
