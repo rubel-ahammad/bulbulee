@@ -1,6 +1,6 @@
 package com.bulbulee.app.controllers;
 
-import com.bulbulee.app.common.enums.MemberType;
+import com.bulbulee.common.enumeration.MemberType;
 import com.bulbulee.facade.api.MemberFacade;
 import com.bulbulee.facade.dto.MemberCreateDto;
 import com.bulbulee.facade.dto.MemberDto;

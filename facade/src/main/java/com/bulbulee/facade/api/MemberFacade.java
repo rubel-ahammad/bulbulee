@@ -1,7 +1,7 @@
 package com.bulbulee.facade.api;
 
 import com.bulbulee.facade.dto.MemberCreateDto;
-import com.bulbulee.app.common.enums.MemberType;
+import com.bulbulee.common.enumeration.MemberType;
 import com.bulbulee.facade.dto.MemberDto;
 
 import java.util.List;

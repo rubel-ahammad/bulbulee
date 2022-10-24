@@ -1,6 +1,6 @@
 package com.bulbulee.repository.converters;
 
-import com.bulbulee.app.common.enums.MemberType;
+import com.bulbulee.common.enumeration.MemberType;
 
 public class MemberTypeConverter {
     MemberType fromNumber(Integer id) {

@@ -1,6 +1,6 @@
 package com.bulbulee.model.entity;
 
-import com.bulbulee.app.common.enums.MemberType;
+import com.bulbulee.common.enumeration.MemberType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

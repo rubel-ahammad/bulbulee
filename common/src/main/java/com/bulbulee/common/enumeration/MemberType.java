@@ -1,4 +1,4 @@
-package com.bulbulee.app.common.enums;
+package com.bulbulee.common.enumeration;
 
 public enum MemberType {
     FREE,
