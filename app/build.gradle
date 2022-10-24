@@ -5,9 +5,10 @@ plugins {
 
 dependencies {
     implementation(project(":facade"))
-    runtimeOnly project(":facade-impl")
-    runtimeOnly project(":service-impl")
-    runtimeOnly project(":repository-impl")
+    implementation project(":facade-impl")
+    implementation project(":notification")
+    implementation project(":service-impl")
+    implementation project(":repository-impl")
     implementation 'org.springframework.boot:spring-boot-devtools'
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-thymeleaf')

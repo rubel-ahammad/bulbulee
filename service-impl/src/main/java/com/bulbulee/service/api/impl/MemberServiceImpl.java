@@ -1,6 +1,7 @@
 package com.bulbulee.service.api.impl;
 
 import com.bulbulee.model.entity.Member;
+import com.bulbulee.model.event.MemberCreatedEvent;
 import com.bulbulee.model.projections.MemberProjection;
 import com.bulbulee.repository.api.MemberRepository;
 import com.bulbulee.repository.query.MemberQuery;
@@ -11,6 +12,7 @@ import com.bulbulee.service.params.MemberSearchParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional
@@ -35,8 +38,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @CacheEvict(cacheNames = CacheNames.MEMBERS, key = "#result.id")
-    private Member saveMember(MemberCreateParams params) {
-        return memberRepository.save(buildMember(params));
+    public Member saveMember(MemberCreateParams params) {
+        Member member = memberRepository.save(buildMember(params));
+        eventPublisher.publishEvent(new MemberCreatedEvent(member));
+        return member;
     }
 
     private Member buildMember(MemberCreateParams params) {
