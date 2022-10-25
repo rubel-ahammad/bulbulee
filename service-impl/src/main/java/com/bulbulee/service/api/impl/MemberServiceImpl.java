@@ -28,7 +28,9 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public Member create(MemberCreateParams params) {
-        return saveMember(params);
+        Member member = saveMember(buildMember(params));
+        eventPublisher.publishEvent(new MemberCreatedEvent(member));
+        return member;
     }
 
     @Override
@@ -38,10 +40,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @CacheEvict(cacheNames = CacheNames.MEMBERS, key = "#result.id")
-    public Member saveMember(MemberCreateParams params) {
-        Member member = memberRepository.save(buildMember(params));
-        eventPublisher.publishEvent(new MemberCreatedEvent(member));
-        return member;
+    public Member saveMember(Member member) {
+        return memberRepository.save(member);
     }
 
     private Member buildMember(MemberCreateParams params) {
